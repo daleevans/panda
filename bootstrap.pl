@@ -63,6 +63,7 @@ sub MAIN(Str :$prefix is copy) {
 
     my $prefix_str = $prefix ?? "--prefix=$prefix" !! '';
     shell "$*EXECUTABLE --ll-exception bin/panda --force $prefix_str install $*CWD";
+    $prefix.=subst(/^inst\#/,"");
     say "==> Please make sure that $prefix/bin is in your PATH";
 
     unlink "$panda-base/projects.json";
