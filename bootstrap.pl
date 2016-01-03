@@ -23,7 +23,7 @@ sub MAIN(Str :$prefix is copy) {
     my @custom-lib = <site home>.map({CompUnit::RepositoryRegistry.repository-for-name($_)});
     for grep(*.defined, flat $prefix, @custom-lib, @repos) -> $target {
         if $target ~~ CompUnit::Repository {
-            $prefix = $target.path-spec;
+            $prefix = "{$target.prefix}";
             $repo   = $prefix;
             $panda-base = "{$target.prefix}/panda";
             try mkdir $panda-base unless $panda-base.IO.d;
